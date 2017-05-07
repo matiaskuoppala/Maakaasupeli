@@ -28,7 +28,7 @@
         game.load.image("tileset", "tileset.png");
 
         //Load sounds
-        game.load.audio("pipesound", "pipeSound.waw");
+        game.load.audio("pipesound", "pipeSound.mp3");
 
     }
 
