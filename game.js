@@ -38,8 +38,8 @@
     var pipe;
     var player;
     var dir = "right";
-    var hMove = 96;
-    var vMove = -250;
+    var hMove = 110;
+    var vMove = -300;
     var jumpTimer = 0;
     var pipesound;
 
@@ -52,7 +52,12 @@
 
         //Add player sprite
         player = game.add.sprite(64, 300, "player");
+<<<<<<< HEAD
 
+=======
+        game.camera.follow(player);
+        
+>>>>>>> origin/master
         //Add pipe sprite and animation
         this.pipe = game.add.sprite(120, 300, "pipe");
         this.pipe.animations.add('spin', [0, 1, 2, 3, 4, 5], 12, true);
