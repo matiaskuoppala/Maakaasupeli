@@ -29,6 +29,7 @@
 
         //Load sounds
         game.load.audio("pipesound", "pipeSound.mp3");
+        game.load.audio("gamemusic", "Laser Groove.mp3");
 
     }
 
@@ -42,6 +43,7 @@
     var vMove = -300;
     var jumpTimer = 0;
     var pipesound;
+    var gamemusic;
 
     function create() {
         //Game background
@@ -56,7 +58,7 @@
 
 =======
         game.camera.follow(player);
-        
+
 >>>>>>> origin/master
         //Add pipe sprite and animation
         this.pipe = game.add.sprite(120, 300, "pipe");
@@ -102,6 +104,9 @@
 
         // Game sounds
         pipesound = game.add.audio("pipesound");
+        gamemusic = game.add.audio("gamemusic");
+
+        gamemusic.play();
         //sounds take time to decode, this notifies when they are ready to use
         //game.sound.setDecodedCallback([ pipesound ], start, this);
 
