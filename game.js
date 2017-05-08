@@ -22,6 +22,8 @@
         game.load.spritesheet("tiles", "tileset.png", 32, 32);
         game.load.spritesheet("door", "door.png", 32, 32);
 
+        game.load.spritesheet("mutebuttonImage", "mutebutton_sprite.png", 30, 30);
+
         //Load level 0
         game.load.tilemap("map", "level0.csv");
         //Load tileset
@@ -44,6 +46,7 @@
     var jumpTimer = 0;
     var pipesound;
     var gamemusic;
+    var mutebutton;
 
     function create() {
         //Game background
@@ -54,12 +57,10 @@
 
         //Add player sprite
         player = game.add.sprite(64, 300, "player");
-<<<<<<< HEAD
 
-=======
         game.camera.follow(player);
 
->>>>>>> origin/master
+
         //Add pipe sprite and animation
         this.pipe = game.add.sprite(120, 300, "pipe");
         this.pipe.animations.add('spin', [0, 1, 2, 3, 4, 5], 12, true);
@@ -110,6 +111,8 @@
         //sounds take time to decode, this notifies when they are ready to use
         //game.sound.setDecodedCallback([ pipesound ], start, this);
 
+        mutebutton = game.add.button(2,2, "mutebuttonImage", mute, this)
+        mutebutton.onInputOver.add(over, this);
 
     }
 
@@ -167,6 +170,19 @@
         obj1.frame = 1;
         obj1.body.impassable = false;
         }
+    }
+
+    function mute() {
+      switch (game.sound.mute) {
+        case true:
+          game.sound.mute = false;
+          mutebutton.frame = 0;
+          break;
+        case false:
+          game.sound.mute = true;
+          mutebutton.frame = 1;
+          break;
+      }
     }
 
 
