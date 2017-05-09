@@ -25,7 +25,7 @@
 
         game.load.spritesheet("mutebuttonImage", "assets/mutebutton_sprite.png", 30, 30);
         game.load.image("infomenu", "assets/info.png");
-        game.load.image("infobutton", "assets/infobuttonImage.png");
+        game.load.image("infobutton", "assets/infobutton.png");
 
         //  Load level 0
         game.load.tilemap("map", "assets/level0.csv");
@@ -165,7 +165,7 @@
         //mutebutton.onInputOver.add(over, this);
         mutebutton.frame = 1;
 
-        infobutton = game.add.button(34, 2, "infobutton", pause, this);
+        infobutton = game.add.button(33, 1, "infobutton", pause, this);
     }
 
     function pause(event) {
