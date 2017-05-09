@@ -39,15 +39,6 @@
     }
 
 
-    function gameOver() {
-        player.kill();
-        game.add.text(game.camera.x + 230, 143, "Game Over!", {
-        font: "65px Arial",
-        fill: "#000000",
-        align: "center"
-        });
-    }
-
     var doorOpen;
     var door;
     var pipesCollected = 0;
@@ -62,6 +53,10 @@
     var mutebutton;
     var enemies;
     var teksti;
+
+
+
+
 
     function create() {
         //  Game background
@@ -151,11 +146,9 @@
         gamemusic = game.add.audio("gamemusic");
 
         gamemusic.play();
-        //sounds take time to decode, this notifies when they are ready to use
-        //game.sound.setDecodedCallback([ pipesound ], start, this);
 
         // Score
-        teksti = game.add.text(game.camera.x + 230, 5, "Pipes collected: " + pipesCollected, {
+        teksti = game.add.text(game.camera.x + 540, 5, "Pipes collected: " + pipesCollected, {
         font: "30px Arial",
         fill: "#000000",
         align: "center"
@@ -168,17 +161,6 @@
         infobutton = game.add.button(33, 1, "infobutton", pause, this);
     }
 
-    function pause(event) {
-      game.paused = true;
-      var infomenu = game.add.image(400, 200, "infomenu");
-      infomenu.anchor.set(0.5);
-      infomenu.inputEnabled = true;
-      infomenu.events.onInputDown.add(function () {
-        console.log("klik");
-        infomenu.visible = false;
-        game.paused = false;
-      }, this);
-    }
 
     function update() {
         //  Player collision with tiles
@@ -214,6 +196,8 @@
 
         // Mutebutton
         mutebutton.x = game.camera.x;
+        infobutton.x = game.camera.x + 33;
+        teksti.x     = game.camera.x + 540;
 
         //  Select frame to display
         if (dir == "left") {
@@ -232,14 +216,37 @@
         showScore();
         }
 
+    function gameOver() {
+      player.kill();
+      end_text = game.add.text(game.camera.x + 230, 143, "Game Over!", {
+          font: "65px Arial",
+          fill: "#000000",
+          align: "center"
+          });
+      restart_label = game.add.text(game.camera.x + 200, 220, "try again by refreshing the page!", {
+          font: "30px Arial",
+          fill: "#000",
+          aling: "center"
+          })
+    }
+
+    function pause(event) {
+      game.paused = true;
+      var infomenu = game.add.image(400, 200, "infomenu");
+      infomenu.anchor.set(0.5);
+      infomenu.inputEnabled = true;
+      infomenu.events.onInputDown.add(function () {
+          infomenu.visible = false;
+          game.paused = false;
+          }, this);
+      }
+
     function showScore() {
       teksti.setText("Pipes collected: " + pipesCollected);
     }
 
     function collectPipe(item, item2) {
-      console.log(pipesCollected)
         pipesCollected ++;
-        console.log(pipesCollected)
         pipesound.play();
         item2.destroy();
         if (pipesCollected == 10) {
