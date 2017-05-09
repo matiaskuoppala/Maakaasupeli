@@ -36,6 +36,7 @@
         game.load.audio("gamemusic", "assets/Laser Groove.mp3");
     }
 
+
     function gameOver() {
         player.kill();
         game.add.text(game.camera.x + 230, 143, "Game Over!", {
@@ -58,6 +59,7 @@
     var gamemusic;
     var mutebutton;
     var enemies;
+    var teksti;
 
     function create() {
         //  Game background
@@ -110,12 +112,7 @@
         //  Enable physics for player
         game.physics.enable(player);
 
-        // Score
-        game.add.text(game.camera.x + 230, 5, "Pipes collected: " + pipesCollected, {
-        font: "30px Arial",
-        fill: "#000000",
-        align: "center"
-        });
+
 
         //  Set player to collide with world bounds
         player.body.collideWorldBounds = true;
@@ -154,6 +151,13 @@
         gamemusic.play();
         //sounds take time to decode, this notifies when they are ready to use
         //game.sound.setDecodedCallback([ pipesound ], start, this);
+
+        // Score
+        teksti = game.add.text(game.camera.x + 230, 5, "Pipes collected: " + pipesCollected, {
+        font: "30px Arial",
+        fill: "#000000",
+        align: "center"
+        });
 
         mutebutton = game.add.button(2,2, "mutebuttonImage", mute, this);
         //mutebutton.onInputOver.add(over, this);
@@ -209,10 +213,17 @@
 
         //console.log(player.x);
         //console.log(player.y);
+        showScore();
         }
 
+    function showScore() {
+      teksti.setText("Pipes collected: " + pipesCollected);
+    }
+
     function collectPipe(item, item2) {
-        this.pipesCollected += 1;
+      console.log(pipesCollected)
+        pipesCollected ++;
+        console.log(pipesCollected)
         pipesound.play();
         item2.destroy();
         if (pipesCollected == 10) {
