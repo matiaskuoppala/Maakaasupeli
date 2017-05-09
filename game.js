@@ -24,6 +24,8 @@
         game.load.spritesheet("enemy", "assets/enemy.png", 32, 32);
 
         game.load.spritesheet("mutebuttonImage", "assets/mutebutton_sprite.png", 30, 30);
+        game.load.image("infomenu", "assets/info.png");
+        game.load.image("infobutton", "assets/infobuttonImage.png");
 
         //  Load level 0
         game.load.tilemap("map", "assets/level0.csv");
@@ -33,7 +35,7 @@
 
         //  Load sounds
         game.load.audio("pipesound", "assets/pipeSound.mp3");
-        game.load.audio("gamemusic", "assets/Laser Groove.mp3");
+        game.load.audio("gamemusic", "assets/laser_groove.mp3");
     }
 
 
@@ -43,7 +45,7 @@
         font: "65px Arial",
         fill: "#000000",
         align: "center"
-    });
+        });
     }
 
     var doorOpen;
@@ -162,6 +164,20 @@
         mutebutton = game.add.button(2,2, "mutebuttonImage", mute, this);
         //mutebutton.onInputOver.add(over, this);
         mutebutton.frame = 1;
+
+        infobutton = game.add.button(34, 2, "infobutton", pause, this);
+    }
+
+    function pause(event) {
+      game.paused = true;
+      var infomenu = game.add.image(400, 200, "infomenu");
+      infomenu.anchor.set(0.5);
+      infomenu.inputEnabled = true;
+      infomenu.events.onInputDown.add(function () {
+        console.log("klik");
+        infomenu.visible = false;
+        game.paused = false;
+      }, this);
     }
 
     function update() {
@@ -269,6 +285,7 @@
           break;
       }
     }
+
 
 
 }(Phaser));
