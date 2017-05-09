@@ -33,7 +33,7 @@
 
         //  Load sounds
         game.load.audio("pipesound", "assets/pipeSound.mp3");
-        game.load.audio("gamemusic", "assets/Laser Groove.mp3");
+        game.load.audio("gamemusic", "assets/laser_groove.mp3");
     }
 
     // Game over function
