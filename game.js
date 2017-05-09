@@ -106,7 +106,7 @@
         });
 
         //  Add door sprite and animation
-        this.door = game.add.sprite(768, 352, "door");
+        this.door = game.add.sprite(4160, 352, "door");
         game.physics.enable(this.door);
         this.door.body.immovable = true;
 
@@ -169,7 +169,10 @@
 
         //  Player collision with enemies
         game.physics.arcade.collide(player, this.enemies, hitEnemy, null, this);
-
+        
+        //  Player collision with door
+        game.physics.arcade.collide(player, door, hitDoor, null, this);
+        
         //  Reset player velocity
         player.body.velocity.x = 0;
 
