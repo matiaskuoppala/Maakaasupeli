@@ -17,21 +17,21 @@
 
     function preload() {
         //Load player spritesheet
-        game.load.spritesheet("player", "player.png", 32, 32);
-        game.load.spritesheet("pipe", "pipe.png", 32, 32);
-        game.load.spritesheet("tiles", "tileset.png", 32, 32);
-        game.load.spritesheet("door", "door.png", 32, 32);
+        game.load.spritesheet("player", "assets/player.png", 32, 32);
+        game.load.spritesheet("pipe", "assets/pipe.png", 32, 32);
+        game.load.spritesheet("tiles", "assets/tileset.png", 32, 32);
+        game.load.spritesheet("door", "assets/door.png", 32, 32);
 
-        game.load.spritesheet("mutebuttonImage", "mutebutton_sprite.png", 30, 30);
+        game.load.spritesheet("mutebuttonImage", "assets/mutebutton_sprite.png", 30, 30);
 
         //Load level 0
-        game.load.tilemap("map", "level0.csv");
+        game.load.tilemap("map", "assets/level0.csv");
         //Load tileset
-        game.load.image("tileset", "tileset.png");
+        game.load.image("tileset", "assets/tileset.png");
 
         //Load sounds
-        game.load.audio("pipesound", "pipeSound.mp3");
-        game.load.audio("gamemusic", "Laser Groove.mp3");
+        game.load.audio("pipesound", "assets/pipeSound.mp3");
+        game.load.audio("gamemusic", "assets/Laser Groove.mp3");
 
     }
 
@@ -112,7 +112,7 @@
         //game.sound.setDecodedCallback([ pipesound ], start, this);
 
         mutebutton = game.add.button(2,2, "mutebuttonImage", mute, this)
-        mutebutton.onInputOver.add(over, this);
+        mutebutton.onInputOver.add(this.over, this);
 
     }
 
