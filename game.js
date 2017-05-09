@@ -36,7 +36,7 @@
         game.load.audio("gamemusic", "assets/Laser Groove.mp3");
     }
 
-
+    // Game over function
     function gameOver() {
         player.kill();
         game.add.text(game.camera.x + 230, 143, "Game Over!", {
@@ -52,14 +52,14 @@
     var pipes;
     var player;
     var dir = "right";
-    var hMove = 400;
+    var hMove = 120;
     var vMove = -300;
     var jumpTimer = 0;
     var pipesound;
     var gamemusic;
     var mutebutton;
     var enemies;
-    var teksti;
+    var text;
 
     function create() {
         //  Game background
@@ -79,11 +79,15 @@
         this.enemies.create(1330, 64, 'enemy');
         this.enemies.create(2513, 352, 'enemy');
         this.enemies.create(2790, 64, 'enemy');
-        this.enemies.create(3456, 352, 'enemy');
+        this.enemies.create(3520, 352, 'enemy');
         this.enemies.create(3328, 96, 'enemy');
-        this.enemies.create(3328, 352, 'enemy');
-
-
+        this.enemies.create(3424, 352, 'enemy');
+        game.time.events.loop(2000, moveEnemy, this);
+        this.enemies.forEach(function(e) {
+            e.body.velocity.x = -70
+            e.frame = 1;
+        });
+        
         //  Add pipe sprite and animation
         this.pipes = game.add.physicsGroup();
         this.pipes.create(32, 64, 'pipe');
@@ -99,10 +103,7 @@
         this.pipes.forEach(function(obj) {
             obj.animations.add('spin', [0, 1, 2, 3, 4, 5], 12, true);
             obj.animations.play("spin");
-            //game.physics.enable(obj);
         });
-        //this.pipe.animations.add('spin', [0, 1, 2, 3, 4, 5], 12, true);
-        //this.pipe.animations.play("spin");
 
         //  Add door sprite and animation
         this.door = game.add.sprite(768, 352, "door");
@@ -111,8 +112,6 @@
 
         //  Enable physics for player
         game.physics.enable(player);
-
-
 
         //  Set player to collide with world bounds
         player.body.collideWorldBounds = true;
@@ -149,18 +148,15 @@
         gamemusic = game.add.audio("gamemusic");
 
         gamemusic.play();
-        //sounds take time to decode, this notifies when they are ready to use
-        //game.sound.setDecodedCallback([ pipesound ], start, this);
 
         // Score
-        teksti = game.add.text(game.camera.x + 230, 5, "Pipes collected: " + pipesCollected, {
-        font: "30px Arial",
-        fill: "#000000",
+        text = game.add.text(game.camera.x + 230, 3, "Pipes collected: " + pipesCollected, {
+        font: "25px Arial",
+        fill: "#ADD8E6",
         align: "center"
         });
 
         mutebutton = game.add.button(2,2, "mutebuttonImage", mute, this);
-        //mutebutton.onInputOver.add(over, this);
         mutebutton.frame = 1;
     }
 
@@ -210,14 +206,12 @@
         if (this.doorOpen) {
             game.physics.arcade.collide(this.door, player);
         }
-
-        //console.log(player.x);
-        //console.log(player.y);
         showScore();
         }
 
     function showScore() {
-      teksti.setText("Pipes collected: " + pipesCollected);
+        text.setText("Pipes collected: " + pipesCollected);
+        text.x = game.camera.x + 300;
     }
 
     function collectPipe(item, item2) {
@@ -256,7 +250,19 @@
         align: "center"
     });
     }
-
+    
+    function moveEnemy() {
+        this.enemies.forEach(function(e) {
+            if (e.body.velocity.x < 0) {
+            e.body.velocity.x += 140;
+            e.frame = 0;
+            } else {
+            e.body.velocity.x -= 140;
+            e.frame = 1;
+            }
+        });
+    }
+    
     function mute() {
       switch (game.sound.mute) {
         case true:
