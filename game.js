@@ -145,10 +145,10 @@
         pipesound = game.add.audio("pipesound");
         gamemusic = game.add.audio("gamemusic");
 
-        gamemusic.play();
+        gamemusic.loopFull(2.48);
 
         // Score
-        teksti = game.add.text(game.camera.x + 540, 5, "Pipes collected: " + pipesCollected, {
+        teksti = game.add.text(game.camera.x + 540, 3, "Pipes collected: " + pipesCollected, {
         font: "30px Arial",
         fill: "#000000",
         align: "center"
